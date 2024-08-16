@@ -24,7 +24,7 @@ const Home = () => {
 					})
 					.catch((error) => {
 						console.error(error);
-						refresh(fetchblog);
+						alert("Can't get blogs", JSON.stringify(error.response.data));
 					});
 			};
 			fetchblog();
@@ -32,18 +32,21 @@ const Home = () => {
 	}, [currentUser, navigate, refresh]);
 
 	return (
-		<section className="bg-gray-50 dark:bg-gray-900">
-			<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-				{blogs.map((e) => (
-					<Card
-						key={e.id}
-						title={e.title}
-						description={e.content}
-						author={e.author}
-						date={e.created_at}
-						id={e.id}
-					/>
-				))}
+		<section className="bg-gray-50 dark:bg-gray-900 pt-20 min-h-screen">
+			<div className="px-6 py-8 mx-auto lg:py-0">
+				<h1 className="text-3xl mb-5 font-semibold pl-10 dark:text-white">All Blogs</h1>
+				<div className="flex gap-5 flex-wrap">
+					{blogs.map((e) => (
+						<Card
+							key={e.id}
+							title={e.title}
+							description={e.content}
+							author={e.author}
+							date={e.created_at}
+							id={e.id}
+						/>
+					))}
+				</div>
 			</div>
 		</section>
 	);
@@ -57,11 +60,9 @@ const textShortner = (text, maxlen) => {
 const Card = ({ title, description, id }) => {
 	return (
 		<div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-			<a href="#">
-				<h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-					{textShortner(title, 20)}
-				</h5>
-			</a>
+			<h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+				{textShortner(title, 20)}
+			</h5>
 			<p className="mb-3 font-normal text-gray-700 dark:text-gray-400 break-words">
 				{textShortner(description, 100)}
 			</p>

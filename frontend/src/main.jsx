@@ -10,6 +10,9 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Error from "./pages/Error";
 import Blog from "./pages/Blog";
+import Create from "./pages/Create";
+import Dashboard from "./pages/Dashboard";
+import EditPost from "./pages/EditPost";
 
 // if (process.env.NODE_ENV === "production") disableReactDevTools();
 
@@ -27,14 +30,14 @@ const router = createBrowserRouter([
 			{ path: "posts/:id", element: <Blog /> },
 			{ path: "register", element: <Register /> },
 			{ path: "login", element: <Login /> },
+			{ path: "create", element: <Create /> },
+			{ path: "dashboard/", element: <Dashboard /> },
+			{ path: "dashboard/editpost/:id", element: <EditPost /> },
 			// { path: "profile/:id", element: <UserProfile /> },
 			// { path: "authors", element: <Authors /> },
-			// { path: "create", element: <CreatePost /> },
-			// { path: "posts/:id/edit", element: <EditPost /> },
 			// { path: "posts/:id/delete", element: <DeletePost /> },
 			// { path: "posts/categories/:category", element: <CategoryPost /> },
 			// { path: "posts/user/:id", element: <AuthorPosts /> },
-			// { path: "dashboard/:id", element: <DashBoard /> },
 			// { path: "logout", element: <Logout /> },
 		],
 	},

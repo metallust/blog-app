@@ -9,7 +9,7 @@ const Login = () => {
 		password: "",
 	});
 	const navigate = useNavigate();
-	const { currentUser, setCurrentUser } = useContext(UserContext);
+	const { currentUser, setCurrentUser, refresh } = useContext(UserContext);
 
 	useEffect(() => {
 		if (currentUser) {
@@ -23,18 +23,15 @@ const Login = () => {
 		axios
 			.post(`${import.meta.env.VITE_BACKEND_URL}/api/token/`, userData)
 			.then((res) => {
-				if (res.status == 200) {
-					const token = res.data.access;
-					const refreshToken = res.data.refresh;
-					if (!token && !refreshToken) return alert("Unable to login user", res.data);
-					setCurrentUser({ token, refreshToken });
-					navigate("/");
-				} else if (res.status === 400) {
-					return alert("Invalid input", res.data);
-				}
+				const token = res.data.access;
+				const refreshToken = res.data.refresh;
+				if (!token && !refreshToken) return alert("Unable to login user", res.data);
+				setCurrentUser({ token, refreshToken });
+				navigate("/");
 			})
 			.catch((error) => {
-				alert("Invalid username or password", error);
+				console.error(error);
+				alert("Can't login", JSON.stringify(error.response.data));
 			});
 	};
 
@@ -46,7 +43,7 @@ const Login = () => {
 
 	return (
 		<section className="bg-gray-50 dark:bg-gray-900">
-			<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+			<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto min-h-screen lg:py-0">
 				<div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
 					<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 						<h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">

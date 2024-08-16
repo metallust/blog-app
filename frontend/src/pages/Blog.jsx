@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../context/usercontext";
+import Comments from "../components/Comments";
 import axios from "axios";
 
 const Blog = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
-	const { currentUser, refresh } = useContext(UserContext);
+	const { currentUser } = useContext(UserContext);
 	const [blog, setBlog] = useState({
 		title: "",
 		content: "",
@@ -31,23 +32,26 @@ const Blog = () => {
 						setBlog(res.data);
 					})
 					.catch((error) => {
+						alert("Can't get the blog", JSON.stringify(error.response.data));
 						console.error(error);
-						refresh(fetchblogbyid);
 					});
 			};
 			fetchblogbyid();
 		}
-	}, [currentUser, id, navigate, refresh]);
+	}, [currentUser, id, navigate]);
 
 	return (
 		<section className="bg-gray-50 dark:bg-gray-900">
-			<div className="flex flex-col justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-				<div>title : {blog.title}</div>
-				<div>content : {blog.content}</div>
-				<div>author: {blog.author}</div>
-				<div>created_at: {blog.created_at}</div>
-				<div>updated_at: {blog.updated_at}</div>
-				<div>id: {id},</div>
+			<div className="px-6 pt-20 py-12 mx-auto lg:py-20 min-h-screen">
+				<h2 className="text-4xl font-extrabold dark:text-white">{blog.title}</h2>
+				<div className="mt-1 mb-5 text-lg text-gray-500 flex gap-10">
+					<Link to="/">Author: {blog.author}</Link>
+					<Link to="/">Date: {new Date(blog.updated_at).toDateString()}</Link>
+				</div>
+				<p className="mb-4 text-lg font-normal text-gray-600 dark:text-gray-300">
+					{blog.content}
+				</p>
+				<Comments id={blog.id} />
 			</div>
 		</section>
 	);

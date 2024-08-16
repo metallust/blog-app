@@ -1,7 +1,7 @@
 const Error = () => {
 	return (
-		<div>
-			<h1>Error Page</h1>
+		<div className="flex justify-center items-center">
+			<h1 className="text-red-500">Error Page</h1>
 			<p>Oops! Something went wrong.</p>
 		</div>
 	);
