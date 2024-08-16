@@ -9,7 +9,7 @@ const Login = () => {
 		password: "",
 	});
 	const navigate = useNavigate();
-	const { currentUser, setCurrentUser, refresh } = useContext(UserContext);
+	const { currentUser, setCurrentUser } = useContext(UserContext);
 
 	useEffect(() => {
 		if (currentUser) {

@@ -28,7 +28,7 @@ psql -h localhost -p 5432 -U postgres
 -- give all access of that db to new User
 ```
 
-# -  Bankend setup
+# -  Backend setup
 ```bash
 # create and activate the venv
 python -m venv .venv
