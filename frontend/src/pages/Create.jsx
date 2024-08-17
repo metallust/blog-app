@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/usercontext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -7,9 +7,6 @@ function Create() {
 	const navigate = useNavigate();
 	const [post, setPost] = useState({ title: "", content: "" });
 	const { currentUser } = useContext(UserContext);
-
-	const fetchblogbyid = async () => {};
-	fetchblogbyid();
 
 	const createPost = (e) => {
 		e.preventDefault();
@@ -20,7 +17,7 @@ function Create() {
 			.then((res) => {
 				console.log(res.data);
 				const id = res.data.id;
-				navigate(`/post/${id}`);
+				navigate(`/posts/${id}`);
 			})
 			.catch((error) => {
 				if (error.response.status === 401) {
@@ -29,11 +26,18 @@ function Create() {
 				alert("Can't create post", JSON.stringify(error.response.data));
 			});
 	};
+
 	const changeInputHandler = (e) => {
 		setPost((prev) => {
 			return { ...prev, [e.target.name]: e.target.value };
 		});
 	};
+
+	useEffect(() => {
+		if (!currentUser) {
+			navigate("/login");
+		}
+	}, [currentUser, navigate]);
 
 	return (
 		<div className="bg-gray-50 dark:bg-gray-900 pt-10 min-h-screen p-4">

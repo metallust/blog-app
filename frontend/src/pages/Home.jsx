@@ -46,6 +46,14 @@ const Home = () => {
 							id={e.id}
 						/>
 					))}
+
+					{blogs.length === 0 && (
+						<>
+							<div className="w-full h-2/3 text-gray-500 flex justify-center items-center">
+								No Blogs Found
+							</div>
+						</>
+					)}
 				</div>
 			</div>
 		</section>

@@ -103,6 +103,11 @@ export default function Comments({ id }) {
 					</p>
 				</div>
 			))}
+			{comments.length === 0 && (
+				<div className="w-full text-gray-500 flex justify-center items-center">
+					Be the first one
+				</div>
+			)}
 		</div>
 	);
 }

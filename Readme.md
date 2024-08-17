@@ -24,7 +24,7 @@ DATABASES = {
 ```sql
 psql -h localhost -p 5432 -U postgres 
 -- now create database
--- create user with someassord
+-- create user with some password
 -- give all access of that db to new User
 ```
 

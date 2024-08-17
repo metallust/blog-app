@@ -81,6 +81,15 @@ function Dashboard() {
 						</div>
 					</>
 				)}
+				{me && me.posts.length === 0 && (
+					<>
+						<div className="w-full h-2/3 text-gray-500 flex justify-center text-center">
+							No Blogs Found
+							<br />
+							Create a new blog by clicking '+ Create Blog' on the button below
+						</div>
+					</>
+				)}
 			</div>
 		</section>
 	);
